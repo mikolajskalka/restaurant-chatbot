@@ -14,7 +14,7 @@ This chatbot can:
 
 ## Prerequisites
 
-- Python 3.10 or higher
+- Python 3.10
 - pip (Python package manager)
 - Discord account and bot token
 - macOS (for other operating systems, commands may vary)
@@ -27,42 +27,15 @@ git clone <repository-url>
 cd python_chatbot
 ```
 
-2. Create and activate virtual environment:
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
-3. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-4. Set up environment variables:
-```bash
-cp .env.example .env
-```
-Then edit `.env` file and add your Discord bot token:
+2. Set up environment variables in `.env` file:
 ```
 DISCORD_TOKEN=your_discord_bot_token_here
 ```
 
-## Project Structure
-
-```
-python_chatbot/
-├── actions/             # Custom Rasa actions
-│   └── actions.py
-├── data/               # Training data
-│   └── nlu.yml        # Natural Language Understanding data
-├── models/            # Trained Rasa models
-├── logs/              # Log files
-├── main.py            # Discord bot implementation
-├── endpoints.yml      # Endpoint configurations
-├── credentials.yml    # Bot credentials
-├── config.yml         # Rasa configuration
-├── domain.yml         # Bot domain specification
-└── run_bot.sh        # Script to run all services
+3. Create and activate virtual environment or run `run_bot.sh` and it will setup everything:
+```bash
+python3 -m venv venv
+source venv/bin/activate
 ```
 
 ## Running the Bot
@@ -128,20 +101,3 @@ Logs are stored in the `logs` directory:
 - `rasa.log` - Rasa server logs
 - `actions.log` - Action server logs
 - `bot.log` - Discord bot logs
-
-## Contributing
-
-This is a university project developed for educational purposes. If you'd like to contribute, please:
-1. Fork the repository
-2. Create a feature branch
-3. Submit a pull request
-
-## Authors
-
-[Your Name]
-[Your University]
-[Course Name]
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
