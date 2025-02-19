@@ -1,70 +1,94 @@
-import json
-import rasa
+import os
+import discord
+from discord.ext import commands
+from dotenv import load_dotenv
+from rasa.core.agent import Agent
+from rasa.core.utils import EndpointConfig
+import asyncio
+import logging
+import yaml
 
-with open("opening_hours.json") as oh_file:
-    opening_hours_data = json.load(oh_file)
+# Set up logging
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
-with open("menu.json") as menu_file:
-    menu_data = json.load(menu_file)
+# Load environment variables
+load_dotenv()
+TOKEN = os.getenv('DISCORD_TOKEN')
 
-intents = {
-    "opening_hours": [
-        "What are your opening hours?",
-        "When are you open?",
-        "Give me your schedule."
-    ],
-    "menu_info": [
-        "What do you serve?",
-        "Show me the menu.",
-        "What's on your menu?"
-    ],
-    "place_order": [
-        "I'd like to order",
-        "Can I get a meal?",
-        "I want to buy something"
-    ]
-}
+# Create bot instance
+intents = discord.Intents.default()
+intents.message_content = True
+bot = commands.Bot(command_prefix='!', intents=intents)
 
-class RestaurantChatbot:
-    def __init__(self):
-        self.intents = intents
+# Load Rasa model
+try:
+    model_path = "models/20250218-235416-tiny-conduit.tar.gz"
+    
+    # Load endpoints from yaml file
+    with open("endpoints.yml", "r") as f:
+        endpoints = yaml.safe_load(f)
+    
+    # Create endpoint config
+    action_endpoint = EndpointConfig(
+        endpoints["action_endpoint"]["url"]
+    )
+    
+    # Load agent with proper endpoint configuration
+    agent = Agent.load(
+        model_path,
+        action_endpoint=action_endpoint
+    )
+    
+    logger.info(f"Successfully loaded Rasa model from {model_path}")
+except Exception as e:
+    logger.error(f"Failed to load Rasa model: {str(e)}")
+    raise SystemExit("Could not load Rasa model. Exiting.")
 
-    def recognize_intent(self, user_input):
-        for intent_name, phrases in self.intents.items():
-            if any(phrase.lower() in user_input.lower() for phrase in phrases):
-                return intent_name
-        return None
 
-    def handle_opening_hours(self):
-        hours = opening_hours_data["items"]
-        return "Our hours are: " + ", ".join(
-            f"{day}: {info['open']} - {info['close']}" for day, info in hours.items()
-        )
+async def get_rasa_response(message_text, sender_id):
+    """Async function to get response from Rasa"""
+    loop = asyncio.get_event_loop()
+    responses = await agent.handle_text(
+        text_message=message_text,
+        sender_id=sender_id
+    )
+    return responses
 
-    def handle_menu_info(self):
-        items = menu_data["items"]
-        return "We offer: " + ", ".join(item["name"] for item in items)
+@bot.event
+async def on_ready():
+    logger.info(f'{bot.user} has connected to Discord!')
 
-    def handle_place_order(self, user_input):
-        return f"Your order for '{user_input}' has been placed!"
+@bot.event
+async def on_message(message):
+    # Ignore messages from the bot itself
+    if message.author == bot.user:
+        return
 
-    def on_message(self, user_input):
-        intent = self.recognize_intent(user_input)
-        if intent == "opening_hours":
-            return self.handle_opening_hours()
-        elif intent == "menu_info":
-            return self.handle_menu_info()
-        elif intent == "place_order":
-            return self.handle_place_order(user_input)
+    try:
+        # Log incoming message
+        logger.debug(f"Received message: {message.content}")
+        
+        # Use sender's ID to maintain conversation state
+        sender_id = str(message.author.id)
+        
+        # Get response from Rasa
+        responses = await get_rasa_response(message.content, sender_id)
+        
+        # Handle Rasa response
+        if responses:
+            logger.debug(f"Rasa responses: {responses}")
+            for response in responses:
+                if isinstance(response, dict) and 'text' in response:
+                    await message.channel.send(response['text'])
+                    logger.debug(f"Sent response: {response['text']}")
         else:
-            return "I’m not sure. Can you rephrase?"
+            logger.warning(f"No response received from Rasa for message: {message.content}")
+            await message.channel.send("I'm not sure how to respond to that.")
+            
+    except Exception as e:
+        logger.error(f"Error processing message: {str(e)}", exc_info=True)
+        await message.channel.send("I'm having trouble understanding that right now.")
 
-if __name__ == "__main__":
-    bot = RestaurantChatbot()
-    while True:
-        user_text = input("You: ")
-        if user_text.lower() in ["exit", "quit"]:
-            print("Chatbot: Goodbye!")
-            break
-        response = bot.on_message(user_text)
-        print(f"Chatbot: {response}")
+# Run the bot
+bot.run(TOKEN)
