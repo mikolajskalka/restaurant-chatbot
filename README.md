@@ -69,6 +69,25 @@ To retrain the Rasa model with updated data:
 rasa train
 ```
 
+## Training Data Generation
+
+The project includes a training data generator utility that creates diverse training datasets with common typos and variations:
+
+```bash
+python utils/training_data_generator.py
+```
+
+Located in `utils/training_data_generator.py`, this script:
+- Generates training examples for different intents
+- Applies realistic typos and variations
+- Handles multiple templates for:
+  - Placing orders
+  - Checking order status
+  - Inquiring about opening hours
+  - Checking if restaurant is open
+- Supports entity recognition for dishes
+- Creates YAML-formatted output compatible with Rasa's training format
+
 ## Available Commands
 
 The bot understands the following intents:
