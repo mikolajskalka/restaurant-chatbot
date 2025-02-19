@@ -69,13 +69,25 @@ stories:
       - dish_valid: true
   - action: action_place_order
 
-- story: order path with invalid dish
+- story: order path with invalid dish - show menu
   steps:
   - intent: place_order
   - action: action_validate_dish
   - slot_was_set:
       - dish_valid: false
   - action: utter_unknown_dish
+  - intent: affirm
+  - action: action_get_menu
+
+- story: order path with invalid dish - no menu
+  steps:
+  - intent: place_order
+  - action: action_validate_dish
+  - slot_was_set:
+      - dish_valid: false
+  - action: utter_unknown_dish
+  - intent: deny
+  - action: utter_what_else
 
 - story: simple delivery time path
   steps:
