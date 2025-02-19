@@ -1,6 +1,6 @@
 # Restaurant Chatbot Assistant
 
-A Discord chatbot built with Rasa and Python for handling restaurant orders and inquiries. This project was developed as part of the Scripting Languages course at [Your University Name].
+A Discord chatbot built with Rasa and Python for handling restaurant orders and inquiries. This project was developed as part of the Scripting Languages course at Jagiellonian University.
 
 ## Project Overview
 
