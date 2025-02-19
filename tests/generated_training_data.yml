@@ -1,0 +1,89 @@
+version: "3.1"
+
+nlu:
+- intent: place_order
+  examples: |
+    - I would lke to orde [Pizza](dish)
+    - I would like to order [Burger](dish)
+    - I would lke to order [Spaghetti](dish)
+    - I would lke to oder [Lasagne](dish)
+    - I would like to ordr [Sushi](dish)
+    - I wud liek to order [Pad Thai](dish)
+    - I wuld like to order [Tacos](dish)
+    - I would like to order [Fish and Chips](dish)
+    - I wud liek to order [Ramen](dish)
+    - Can I hav [Pizza](dish)
+    - Can I have [Burger](dish)
+    - Can I hav [Spaghetti](dish)
+    - Can I have [Lasagne](dish)
+    - Can I ave [Sushi](dish)
+    - Can I have [Pad Thai](dish)
+    - Can I have [Tacos](dish)
+    - Can I ave [Fish and Chips](dish)
+    - Can I have [Ramen](dish)
+    - I want to order [Pizza](dish)
+    - I want to order [Burger](dish)
+    - I want to orde [Spaghetti](dish)
+    - I want to oder [Lasagne](dish)
+    - I want to oder [Sushi](dish)
+    - I want to order [Pad Thai](dish)
+    - I want to order [Tacos](dish)
+    - I want to orde [Fish and Chips](dish)
+    - I want to order [Ramen](dish)
+    - Give me [Pizza](dish)
+    - Give me [Burger](dish)
+    - Give me [Spaghetti](dish)
+    - Give me [Lasagne](dish)
+    - Give me [Sushi](dish)
+    - Give me [Pad Thai](dish)
+    - Give me [Tacos](dish)
+    - Give me [Fish and Chips](dish)
+    - Give me [Ramen](dish)
+    - Id liek to get [Pizza](dish)
+    - Id lke to get [Burger](dish)
+    - Id liek to get [Spaghetti](dish)
+    - Id liek to get [Lasagne](dish)
+    - Id liek to get [Sushi](dish)
+    - Id like to get [Pad Thai](dish)
+    - Id lke to get [Tacos](dish)
+    - Id like to get [Fish and Chips](dish)
+    - Id like to get [Ramen](dish)
+
+- intent: order_ready
+  examples: |
+    - When will my order be ready
+    - When will my order be ready
+    - How long until I get my orde
+    - How long until I get my order
+    - whn can I get my food
+    - When can I get my food
+    - How much more tym for my order
+    - How much more time for my order
+    - Is my ordr ready yet
+    - Is my order ready yet
+
+- intent: check_restaurant_open
+  examples: |
+    - Are you open now
+    - Are you open now
+    - Is the restaurant opn
+    - Is the restaurant open
+    - Are you guys still open
+    - Are you guys still open
+    - Is this place opn
+    - Is this place open
+    - Do you take orders now
+    - Do you take orders now
+
+- intent: opening_hours
+  examples: |
+    - What are your houres
+    - What are your hours
+    - whn do you open
+    - When do you open
+    - What time do you close
+    - What time do you close
+    - Tell me your opening hours
+    - Tell me your opening hours
+    - Until what time are you openn
+    - Until what time are you open

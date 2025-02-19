@@ -1,0 +1,32 @@
+version: "2.0"
+nlu:
+- intent: greet
+  examples: |
+    - hello
+    - hi
+    - hey
+    - good morning
+    - good evening
+- intent: goodbye
+  examples: |
+    - bye
+    - see you later
+    - goodbye
+    - take care
+- intent: affirm
+  examples: |
+    - yes
+    - indeed
+    - that's right
+    - correct
+- intent: deny
+  examples: |
+    - no
+    - not at all
+    - I don't think so
+    - nope
+- intent: inform
+  examples: |
+    - I want to book a flight
+    - I need a hotel room
+    - I am looking for a restaurant

@@ -1,0 +1,88 @@
+version: "3.1"
+
+stories:
+- story: order path with valid dish
+  steps:
+  - intent: place_order
+  - action: action_validate_dish
+  - slot_was_set:
+      - dish_valid: true
+  - action: action_place_order
+
+- story: opening hours path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: opening_hours
+  - action: action_get_opening_hours
+
+- story: order path invalid dish 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: menu_info
+  - action: action_get_menu
+  - intent: place_order
+  - action: action_validate_dish
+  - slot_was_set:
+      - dish_valid: false
+  - action: utter_unknown_dish
+
+
+- story: unknown dish path menu
+  steps:
+  - action: utter_unknown_dish
+  - intent: affirm
+  - action: action_get_menu
+
+
+- story: unknown dish path
+  steps:
+  - action: utter_unknown_dish
+  - intent: deny
+  - action: utter_what_else
+
+- story: order path valid dish 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: menu_info
+  - action: action_get_menu
+  - intent: place_order
+  - action: action_validate_dish
+  - slot_was_set:
+      - dish_valid: true
+  - action: action_place_order
+  - intent: thanks
+  - action: utter_thanks
+
+- story: check if open path 2
+  steps:
+  - intent: check_restaurant_open
+  - action: action_is_restaurant_open
+
+- story: order path with valid dish
+  steps:
+  - intent: place_order
+  - action: action_validate_dish
+  - slot_was_set:
+      - dish_valid: true
+  - action: action_place_order
+
+- story: order path with invalid dish
+  steps:
+  - intent: place_order
+  - action: action_validate_dish
+  - slot_was_set:
+      - dish_valid: false
+  - action: utter_unknown_dish
+
+- story: simple delivery time path
+  steps:
+  - intent: order_ready
+  - action: action_get_order_ready_time
+
+- story: simple bussiness hours path
+  steps:
+  - intent: opening_hours
+  - action: action_get_opening_hours

@@ -1,0 +1,134 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+    - yeah
+    - yep
+    - sure
+    - absolutely
+    - exactly
+    - definitely
+    - ok
+    - okay
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+    - nope
+    - not at all
+    - negative
+    - definitely not
+    - not sure
+    - I decline
+    - I don't want to
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+- intent: menu_info
+  examples: |
+    - Can you show me the menu?
+    - I'd like to see what you're serving
+    - What's on the menu?
+    - May I see the menu?
+    - Tell me what dishes you have
+    - What are you serving today?
+    - What do you serve?
+
+- intent: place_order
+  examples: |
+    - I'd like to order a [Lasagne](dish)
+    - Let me have a [Pizza](dish)
+    - I'd like a [hot-dog](dish)
+    - Can I have a [Burger](dish)?
+    - Please give me [Spaghetti Carbonara](dish)
+    - I want to try the [Tiramisu](dish)
+    - [Pizza](dish), please
+    - [Spaghetti Carbonara](dish), please
+    - I'd like to order a [Paella](dish)
+    - Can I get some [Sushi](dish)?
+    - I want [Pad Thai](dish)
+    - Do you serve [Tacos](dish)?
+    - Let me have [Fish and Chips](dish)
+    - I'd like to try the [Greek Salad](dish)
+    - Can I order [Ramen](dish)?
+    - Is [Chicken Wings](dish) available?
+
+- intent: thanks
+  examples: |
+    - thanks
+    - Thank you
+    - Thx
+    - Thanks a lot
+
+- intent: check_restaurant_open
+  examples: |
+    - Are you open right now?
+    - Is the restaurant currently open?
+    - Are you open at this moment?
+    - Is it open today?
+    - Are you serving at the moment?
+
+
+- intent: order_ready
+  examples: |
+    - When will my order be ready?
+    - How long until my order is ready?
+    - What's the preparation time for my order?
+    - Can you tell me how soon my order will be ready?
+    - How much time until my order is prepared?
+
+
+- intent: opening_hours
+  examples: |
+    - What are your opening hours?
+    - When do you open and close?
+    - Could you tell me your business hours?
+    - What time do you start serving?
+    - Can I know your operating hours?

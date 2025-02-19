@@ -1,0 +1,71 @@
+version: "3.1"
+
+intents:
+  - greet
+  - affirm
+  - deny
+  - goodbye
+  - bot_challenge
+  - menu_info
+  - place_order
+  - check_restaurant_open
+  - thanks
+  - order_ready
+  - opening_hours
+
+responses:
+  utter_greet:
+  - text: "Hello! How can I help you today?"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_thanks:
+  - text: "Thank you!"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+  utter_menu_info:
+  - text: "We serve pizza, pasta and more!"
+
+  utter_what_else:
+  - text: "Ok, what else can I do for you?"
+
+  utter_unknown_dish:
+  - text: "I'm sorry, but it is not currently on our menu. Would you like to see our available dishes?"
+  - text: "Unfortunately, we don't serve this dish. Would you like to see what we have on the menu?"
+
+entities:
+  - dish
+
+slots:
+  dish:
+    type: list
+    mappings:
+    - type: from_entity
+      entity: dish
+      intent: place_order
+  dish_valid:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: custom
+
+actions:
+- action_get_menu
+- action_place_order
+- action_get_opening_hours
+- action_get_order_ready_time
+- action_is_restaurant_open
+- action_reset_slots
+- action_validate_dish
+
+
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: false
