@@ -9,7 +9,7 @@ import logging
 import yaml
 
 # Set up logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 # Load environment variables
@@ -23,7 +23,7 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 
 # Load Rasa model
 try:
-    model_path = "models/20250218-235416-tiny-conduit.tar.gz"
+    model_path = "models/20250219-232421-vintage-center.tar.gz"
     
     # Load endpoints from yaml file
     with open("endpoints.yml", "r") as f:
